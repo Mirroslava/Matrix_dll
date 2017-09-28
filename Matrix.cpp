@@ -98,16 +98,16 @@ void Matrix::inverse(double** matrixA, int _n)
 	{
 		matrixB[i] = new double [n];
 	}
-	for(int i=0; i<n; i++)    //çàíóëåííÿ ìàòðèö³
+	for(int i=0; i<n; i++)    //Ã§Ã Ã­Ã³Ã«Ã¥Ã­Ã­Ã¿ Ã¬Ã Ã²Ã°Ã¨Ã¶Â³
     {
 	    for(int j=0; j<n; matrixB[i][j]=0, j++);
     }
-    for(int i=0; i<n; matrixB[i][i]=1, i++);   // îäèíè÷íà ìàòðèöÿ
+    for(int i=0; i<n; matrixB[i][i]=1, i++);   // Ã®Ã¤Ã¨Ã­Ã¨Ã·Ã­Ã  Ã¬Ã Ã²Ã°Ã¨Ã¶Ã¿
 
-	for(int k=0; k<n-1; k++)   //ë³÷èëüíèê ðÿäê³â
+	for(int k=0; k<n-1; k++)   //Ã«Â³Ã·Ã¨Ã«Ã¼Ã­Ã¨Ãª Ã°Ã¿Ã¤ÃªÂ³Ã¢
     {
-	    Imax=k;    //ìàêñèìàëüíèé åëåìåíò â ñòîâïö³
-        for(int i=k+1; i<n; i++)           //ïîøóê 
+	    Imax=k;    //Ã¬Ã ÃªÃ±Ã¨Ã¬Ã Ã«Ã¼Ã­Ã¨Ã© Ã¥Ã«Ã¥Ã¬Ã¥Ã­Ã² Ã¢ Ã±Ã²Ã®Ã¢Ã¯Ã¶Â³
+        for(int i=k+1; i<n; i++)           //Ã¯Ã®Ã¸Ã³Ãª 
         {
 	      	if(abs(matrixA[Imax][k])<abs(matrixA[i][k]))
 		    {
@@ -151,6 +151,25 @@ void Matrix::inverse(double** matrixA, int _n)
     }
     delete [] matrixB;
 }
+void Matrix::MUL(double** matrixA, double** matrixB, int n_A, int m_A, int n_B, int m_B)
+{
+    if(m_A==n_B)
+	{
+		NEW(n_A, m_B);
+		NUL();
+		for ( int i = 0; i < n_A; i++)
+		{
+			for ( int j = 0; j < m_B; j++)
+			{
+				for(int k=0; k<m_A; k++)
+				{
+					matrix[i][j]=matrix[i][j]+matrixA[i][k]*matrixB[k][j];
+				}
+            }
+        }
+    }
+	else cout<<"ERROR!!!!!!!!!!!!!"<<endl;
+}
 
 void Matrix::SLAR(double** matrixA, double** matrixB, int _n)
 {
@@ -158,10 +177,10 @@ void Matrix::SLAR(double** matrixA, double** matrixB, int _n)
 	NUL();
 	double C;
     int Imax;
-	for(int k=0; k<n-1; k++)   //ë³÷èëüíèê ðÿäê³â
+	for(int k=0; k<n-1; k++)   //Ã«Â³Ã·Ã¨Ã«Ã¼Ã­Ã¨Ãª Ã°Ã¿Ã¤ÃªÂ³Ã¢
     {
-	    Imax=k;    //ìàêñèìàëüíèé åëåìåíò â ñòîâïö³
-        for(int i=k+1; i<n; i++)           //ïîøóê 
+	    Imax=k;    //Ã¬Ã ÃªÃ±Ã¨Ã¬Ã Ã«Ã¼Ã­Ã¨Ã© Ã¥Ã«Ã¥Ã¬Ã¥Ã­Ã² Ã¢ Ã±Ã²Ã®Ã¢Ã¯Ã¶Â³
+        for(int i=k+1; i<n; i++)           //Ã¯Ã®Ã¸Ã³Ãª 
         {
 	      	if(abs(matrixA[Imax][k])<abs(matrixA[i][k]))
 		    {
